@@ -5,20 +5,20 @@ import Section from 'components/Section/';
 import Notification from './Reviews/Notification';
 
 export default function App() {
-  const [goodGrades, setGoodGrades] = useState(0);
-  const [neutralGrades, setNeutralGrades] = useState(0);
-  const [badGrades, setBadGrades] = useState(0);
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const increaseRating = grade => {
     switch (grade) {
       case 'good':
-        setGoodGrades(grade => grade + 1);
+        setGood(grade => grade + 1);
         break;
       case 'neutral':
-        setNeutralGrades(grade => grade + 1);
+        setNeutral(grade => grade + 1);
         break;
       case 'bad':
-        setBadGrades(grade => grade + 1);
+        setBad(grade => grade + 1);
         break;
       default:
         console.log(`cant increase unknown grade`);
@@ -26,9 +26,9 @@ export default function App() {
     }
   };
 
-  const grades = { good: goodGrades, neutral: neutralGrades, bad: badGrades };
+  const grades = { good, neutral, bad };
   const total = Object.values(grades).reduce((acc, item) => acc + item, 0);
-  const positive = total === 0 ? 0 : Math.round((goodGrades / total) * 100);
+  const positive = Math.round((good / total) * 100) ?? 0;
   const options = Object.keys(grades);
   const isAnyGrades = Object.values(grades).reduce(
     (acc, item) => acc + item,
